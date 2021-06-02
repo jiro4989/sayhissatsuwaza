@@ -10,7 +10,7 @@ env:
   APP_NAME: 'sayhissatsuwaza'
   NIM_VERSION: '1.4.8'
   MAINTAINER: 'jiro4989'
-  DESC: 'Say hissatsuwaza (special attack).'
+  DESC: 'Say hissatsuwaza (special attack) on your terminal.'
 
 jobs:
   build-artifact:
