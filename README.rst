@@ -16,6 +16,10 @@ Installation
 
    nimble install -Y
 
+or
+
+Download from `GitHub Releases <https://github.com/jiro4989/sayhissatsuwaza/releases>`_.
+
 Usage
 =====
 
