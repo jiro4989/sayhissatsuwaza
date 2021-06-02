@@ -102,5 +102,5 @@ proc generate*(): string =
       result.add v.sample
 
 when isMainModule:
-  for i in 1..100:
-    echo generate()
+  randomize()
+  echo generate()
