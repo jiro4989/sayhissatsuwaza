@@ -2,15 +2,20 @@ import tables, random
 
 type
   ElementType {.pure.} = enum
+    ## 要素。炎とか氷とか。
     non, fire, ice, wind, thunder, holy, darkness
 
   AttackType {.pure.} = enum
+    ## 攻撃の種類。斬撃、打撃、刺突。
     slash, blow, thrust
 
   Kind {.pure.} = enum
+    ## 属性の種類。
     element, attack
 
   Attribute = object
+    ## ElementとAttackをラップして1つの型にラッピングしたもの。
+    ## Generatorで1つの型として扱うために存在する。
     case kind: Kind
     of element:
       fElement: ElementType
@@ -18,9 +23,12 @@ type
       fAttack: AttackType
 
   Language {.pure.} = enum
+    ## 言語。jaとenとしてるけれど、要は漢字のみならja, カタカナならen。
     ja, en
 
   Generator = object
+    ## 必殺技名の組み合わせを定義したジェネレーター。
+    ## 命名ルールと言語。
     lang: Language
     pattern: seq[Attribute]
 
