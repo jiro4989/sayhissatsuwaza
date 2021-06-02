@@ -82,21 +82,16 @@ const
     }.toTable,
   }.toTable
 
-func isElement(pat: Attribute): bool =
-  pat.kind == element
-
-func isAttack(pat: Attribute): bool =
-  pat.kind == attack
-
 proc generate*(): string =
   ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
   let gen = generators.sample
   for attr in gen.pattern:
-    if attr.isElement:
+    case attr.kind
+    of element:
       let elem = attr.fElement
       let v = elementWords[gen.lang][elem]
       result.add v.sample
-    elif attr.isAttack:
+    of attack:
       let atk = attr.fAttack
       let v = attackWords[gen.lang][atk]
       result.add v.sample
