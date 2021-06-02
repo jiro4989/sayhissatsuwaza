@@ -91,7 +91,13 @@ const
   }.toTable
 
 proc generate*(): string =
+  ## 必殺技名をランダムに生成する。
   ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
+  runnableExamples:
+    import random
+    randomize()
+    echo generate()
+
   let gen = generators.sample
   for attr in gen.pattern:
     case attr.kind
