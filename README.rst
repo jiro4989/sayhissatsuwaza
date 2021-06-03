@@ -14,7 +14,7 @@ Installation
 
 .. code-block:: Bash
 
-   nimble install -Y
+   nimble install -Y sayhissatsuwaza
 
 or
 
