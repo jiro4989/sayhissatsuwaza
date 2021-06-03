@@ -12,16 +12,21 @@ sayhissatsuwaza
 Installation
 ============
 
+以下のコマンドを実行する。
+
 .. code-block:: Bash
 
    nimble install -Y sayhissatsuwaza
 
-or
+または
 
-Download from `GitHub Releases <https://github.com/jiro4989/sayhissatsuwaza/releases>`_.
+`GitHub Releases <https://github.com/jiro4989/sayhissatsuwaza/releases>`_ からダウンロードする。
 
 Usage
 =====
+
+Command
+-------
 
 ボキャ貧なので生成される必殺技名のパターンが少ない。
 
@@ -60,10 +65,17 @@ Usage
    風神雷光掌 聖強突 ブレイブブレイク 光連突 聖強突
    フレイムスラッシュ 暗黒刃 火炎刃 風雷光列撃
 
+Web
+------------
+
+GitHub PagesにてWebUIからも必殺技を生成できるようにしている。
+
+https://jiro4989.github.io/sayhissatsuwaza/
+
 Pull request
 ============
 
-Welcome :heart:
+お待ちしてます
 
 LICENSE
 =======
