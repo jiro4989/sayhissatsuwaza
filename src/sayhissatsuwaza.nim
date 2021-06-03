@@ -122,19 +122,30 @@ proc generate*(): string =
       result.add v.sample
 
 when isMainModule:
-  proc sayhissatsuwaza(): int =
-    randomize()
-    echo generate()
-
-  import cligen
-
   const
     appName = "sayhissatsuwaza"
     version = &"""
-{appName} command version 0.2.0
+{appName} command version 0.3.0
 Copyright (c) 2021 jiro4989
 Released under the MIT License.
 https://github.com/jiro4989/{appName}"""
 
+  proc log(msg: string) =
+    echo &"{appName}: {msg}"
+
+  proc sayhissatsuwaza(count = 1): int =
+    if count <= 0:
+      log "'count' parameter must be 1 or more."
+      return 1
+
+    randomize()
+    for i in 1..count:
+      echo generate()
+
+  import cligen
+
   clCfg.version = version
-  dispatch(sayhissatsuwaza)
+  dispatch(sayhissatsuwaza,
+    help = {
+      "count": "loop counter",
+    })
