@@ -122,11 +122,11 @@ proc generate*(): string =
       result.add v.sample
 
 when isMainModule:
-  import os, parseopt
+  proc sayhissatsuwaza(): int =
+    randomize()
+    echo generate()
 
-  type
-    Options = object
-      useHelp, useVersion: bool
+  import cligen
 
   const
     appName = "sayhissatsuwaza"
@@ -135,47 +135,6 @@ when isMainModule:
 Copyright (c) 2021 jiro4989
 Released under the MIT License.
 https://github.com/jiro4989/{appName}"""
-    doc = &"""
-{appName} says a hissatsuwaza (special attack) on your terminal.
 
-Usage:
-    {appName}
-    {appName} (-h | --help)
-    {appName} (-v | --version)
-
-Options:
-    -h, --help       Print this help
-    -v, --version    Print version
-"""
-
-  proc getCmdOpts(params: seq[string]): Options =
-    ## コマンドライン引数を解析して返す。
-    ## helpとversionが見つかったらテキストを標準出力して早期リターンする。
-    var optParser = initOptParser(params)
-
-    for kind, key, val in optParser.getopt():
-      case kind
-      of cmdArgument: discard
-      of cmdLongOption, cmdShortOption:
-        case key
-        of "help", "h":
-          result.useHelp = true
-          return
-        of "version", "v":
-          result.useVersion = true
-          return
-      of cmdEnd:
-        assert false # cannot happen
-
-  let opts = commandLineParams().getCmdOpts()
-
-  if opts.useHelp:
-    echo doc
-    quit 0
-
-  if opts.useVersion:
-    echo version
-    quit 0
-
-  randomize()
-  echo generate()
+  clCfg.version = version
+  dispatch(sayhissatsuwaza)
