@@ -104,7 +104,17 @@ jobs:
       - build-artifact
       - build-linux-packages
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Generate changelog
+        uses: scottbrenner/generate-changelog-action@1.0.2
+        id: changelog
+        env:
+          REPO: ${{ github.repository }}
+        with:
+          package-dir: '.github/package.json'
 
       - name: Create Release
         id: create-release
@@ -114,7 +124,8 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
-          body: ${{ github.ref }}
+          body: |
+            ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
 
