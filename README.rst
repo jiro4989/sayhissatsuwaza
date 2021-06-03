@@ -23,6 +23,8 @@ Download from `GitHub Releases <https://github.com/jiro4989/sayhissatsuwaza/rele
 Usage
 =====
 
+ボキャ貧なので生成される必殺技名のパターンが少ない。
+
 .. code-block:: Bash
 
    $ sayhissatsuwaza
