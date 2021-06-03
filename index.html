@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>sayhissatsuwaza | 必殺技を叫びたい</title>
+    <script src="js/lib.js"></script>
+    <script>
+        function generate() {
+            const hissatsuwaza = cGenerate()
+            const resultElement = document.createElement("li")
+            const textElement = document.createElement("input")
+            textElement.className = "text"
+            textElement.type = "text"
+            textElement.value = hissatsuwaza
+            resultElement.appendChild(textElement)
+            document.getElementById("result").prepend(resultElement)
+        }
+    </script>
+    <style>
+        body {
+            width: 100%;
+        }
+
+        .main-div {
+            width: 80%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        textarea {
+            padding: 0.8em;
+            outline: none;
+            border: 1px solid #DDD;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .button {
+            background-color: #333;
+            border: 2px solid #333;
+            color: #fff;
+            line-height: 50px;
+            transition: all 300ms 0s ease;
+        }
+
+        .text {
+            width: 40vw;
+        }
+
+        .button:hover,
+        .button:focus,
+        .text:hover,
+        .text:focus {
+            background-color: #fff;
+            border-color: #59b1eb;
+            color: #59b1eb;
+            transition: all 300ms 0s ease;
+        }
+
+        h1 {
+            padding: .75em 0;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+
+        h2 {
+            padding: .25em 0 .5em .75em;
+            border-left: 6px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-div">
+        <div>
+            <h1>sayhissatsuwaza</h1>
+            <p>Webブラウザでだって必殺技を叫びたい</p>
+            <hr>
+        </div>
+        <div class="input-div">
+            <section>
+                <h2>入力</h2>
+                <hr>
+                <input class="button" type="button" value="必殺技を生成する" onclick="generate();">
+            </section>
+            <section>
+                <h2>出力</h2>
+                <hr>
+                <ul id="result"></ul>
+            </section>
+        </div>
+    </div>
+</body>
+
+</html>
