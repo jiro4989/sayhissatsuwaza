@@ -1,0 +1,32 @@
+---
+name: GitHub Pages
+
+on:
+  push:
+    branches:
+      - 'master'
+    paths:
+      - 'src/*'
+      - 'public/*'
+
+env:
+  NIM_VERSION: 'devel' # Tableのキーにenumを使うとバグる不具合があったので最新版を使う
+
+jobs:
+  deploy-pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - name: Install Nim
+        uses: jiro4989/setup-nim-action@v1
+        with:
+          nim-version: ${{ env.NIM_VERSION }}
+      - name: Install dependencies
+        run: nimble install -Y
+      - name: Build
+        run: nimble jsBuild
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
