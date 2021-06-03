@@ -124,7 +124,7 @@ proc cGenerate*(): cstring {.exportc.} =
   return generate().cstring
 
 when isMainModule and not defined js:
-  import strformat
+  import strformat, logging
 
   const
     appName = "sayhissatsuwaza"
@@ -134,12 +134,11 @@ Copyright (c) 2021 jiro4989
 Released under the MIT License.
 https://github.com/jiro4989/{appName}"""
 
-  proc log(msg: string) =
-    echo &"{appName}: {msg}"
+  addHandler(newConsoleLogger(fmtStr = verboseFmtStr, useStderr = true))
 
   proc sayhissatsuwaza(count = 1): int =
     if count <= 0:
-      log "'count' parameter must be 1 or more."
+      info "'count' parameter must be 1 or more."
       return 1
 
     randomize()
