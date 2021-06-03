@@ -3,13 +3,15 @@ name: test
 
 on:
   push:
-    paths-ignore:
-      - 'LICENSE'
-      - 'README*'
+    paths:
+      - 'src/*'
+      - '*.nimble'
+      - '.github/*'
   pull_request:
-    paths-ignore:
-      - 'LICENSE'
-      - 'README*'
+    paths:
+      - 'src/*'
+      - '*.nimble'
+      - '.github/*'
 
 env:
   NIM_VERSION: '1.4.8'
