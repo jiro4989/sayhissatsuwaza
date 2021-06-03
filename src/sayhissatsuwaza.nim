@@ -1,7 +1,5 @@
 import tables, random, unicode
 
-import strformat
-
 type
   ElementType {.pure.} = enum
     ## 要素。炎とか氷とか。
@@ -121,7 +119,13 @@ proc generate*(): string =
         result.add elementWords[gen.lang][non].sample
       result.add v.sample
 
-when isMainModule:
+proc cGenerate*(): cstring {.exportc.} =
+  ## JSバックエンド用。
+  return generate().cstring
+
+when isMainModule and not defined js:
+  import strformat
+
   const
     appName = "sayhissatsuwaza"
     version = &"""
