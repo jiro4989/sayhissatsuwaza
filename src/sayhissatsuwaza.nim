@@ -181,19 +181,15 @@ proc generateJapaneseHissatsuwaza*(): string =
   for i, attr in gen.pattern:
     case attr.kind
     of element:
-      let elem = attr.fElement
-      let v = elementWordsJapanese[gen.syllabary][elem]
-      result.add v.sample
+      result.add elementWordsJapanese[gen.syllabary][attr.fElement].sample
     of attack:
-      let atk = attr.fAttack
-      var v = attackWordsJapanese[gen.syllabary][atk]
       # 最後のattributeの時は文字数調整で奇数個になるようにする。
       # attackはいずれも1文字の漢字なので、奇数個の時は1文字の装飾とセットで結合して5文字になるようにする
       if gen.pattern.len == i+1 and
           gen.syllabary == kanji and
           result.toRunes.len mod 2 == 1:
         result.add elementWordsJapanese[gen.syllabary][non].sample
-      result.add v.sample
+      result.add attackWordsJapanese[gen.syllabary][attr.fAttack].sample
 
 proc generateCommon*(lang: Language): string =
   let gen = generators.filterIt(it.lang == lang).sample
