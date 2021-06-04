@@ -57,10 +57,12 @@ const
 
   generators = @[
     Generator(lang: ja, syllabary: kanji, pattern: @[attrFire, attrSlash]),
-    Generator(lang: ja, syllabary: kanji, pattern: @[attrWind, attrThunder, attrBlow]),
+    Generator(lang: ja, syllabary: kanji, pattern: @[attrWind, attrThunder,
+        attrBlow]),
     Generator(lang: ja, syllabary: kanji, pattern: @[attrHoly, attrThrust]),
     Generator(lang: ja, syllabary: kanji, pattern: @[attrDarkness, attrSlash]),
-    Generator(lang: ja, syllabary: kanji, pattern: @[attrNon, attrFire, attrBlow]),
+    Generator(lang: ja, syllabary: kanji, pattern: @[attrNon, attrFire,
+        attrBlow]),
     Generator(lang: ja, syllabary: katakana, pattern: @[attrFire, attrSlash]),
     Generator(lang: ja, syllabary: katakana, pattern: @[attrHoly, attrThrust]),
     Generator(lang: ja, syllabary: katakana, pattern: @[attrNon, attrBlow]),
