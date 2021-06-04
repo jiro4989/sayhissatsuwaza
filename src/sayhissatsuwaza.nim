@@ -30,7 +30,8 @@ type
   Generator = object
     ## 必殺技名の組み合わせを定義したジェネレーター。
     ## 命名ルールと言語。
-    syllabary: Syllabary
+    lang: Language
+    syllabary: Syllabary ## lang = ja の時だけ使用する。
     pattern: seq[Attribute]
 
   Language* = enum
@@ -55,18 +56,18 @@ const
   attrThrust = Attribute(kind: attack, fAttack: thrust)
 
   generators = @[
-    Generator(syllabary: kanji, pattern: @[attrFire, attrSlash]),
-    Generator(syllabary: kanji, pattern: @[attrWind, attrThunder, attrBlow]),
-    Generator(syllabary: kanji, pattern: @[attrHoly, attrThrust]),
-    Generator(syllabary: kanji, pattern: @[attrDarkness, attrSlash]),
-    Generator(syllabary: kanji, pattern: @[attrNon, attrFire, attrBlow]),
-    Generator(syllabary: katakana, pattern: @[attrFire, attrSlash]),
-    Generator(syllabary: katakana, pattern: @[attrHoly, attrThrust]),
-    Generator(syllabary: katakana, pattern: @[attrNon, attrBlow]),
-    Generator(syllabary: katakana, pattern: @[attrIce, attrWind]),
+    Generator(lang: ja, syllabary: kanji, pattern: @[attrFire, attrSlash]),
+    Generator(lang: ja, syllabary: kanji, pattern: @[attrWind, attrThunder, attrBlow]),
+    Generator(lang: ja, syllabary: kanji, pattern: @[attrHoly, attrThrust]),
+    Generator(lang: ja, syllabary: kanji, pattern: @[attrDarkness, attrSlash]),
+    Generator(lang: ja, syllabary: kanji, pattern: @[attrNon, attrFire, attrBlow]),
+    Generator(lang: ja, syllabary: katakana, pattern: @[attrFire, attrSlash]),
+    Generator(lang: ja, syllabary: katakana, pattern: @[attrHoly, attrThrust]),
+    Generator(lang: ja, syllabary: katakana, pattern: @[attrNon, attrBlow]),
+    Generator(lang: ja, syllabary: katakana, pattern: @[attrIce, attrWind]),
   ]
 
-  elementWords = {
+  elementWordsJapanese = {
     kanji: {
       non: @["強", "業", "連", "列"],
       fire: @["火炎", "紅蓮", "炎", "爆炎", "炎帝", "黒炎"],
@@ -87,7 +88,7 @@ const
     }.toTable,
   }.toTable
 
-  attackWords = {
+  attackWordsJapanese = {
     kanji: {
       slash: @["斬", "剣", "刃"],
       blow: @["撃", "掌"],
@@ -113,17 +114,17 @@ proc generateJapaneseHissatsuwaza*(): string =
     case attr.kind
     of element:
       let elem = attr.fElement
-      let v = elementWords[gen.syllabary][elem]
+      let v = elementWordsJapanese[gen.syllabary][elem]
       result.add v.sample
     of attack:
       let atk = attr.fAttack
-      var v = attackWords[gen.syllabary][atk]
+      var v = attackWordsJapanese[gen.syllabary][atk]
       # 最後のattributeの時は文字数調整で奇数個になるようにする。
       # attackはいずれも1文字の漢字なので、奇数個の時は1文字の装飾とセットで結合して5文字になるようにする
       if gen.pattern.len == i+1 and
           gen.syllabary == kanji and
           result.toRunes.len mod 2 == 1:
-        result.add elementWords[gen.syllabary][non].sample
+        result.add elementWordsJapanese[gen.syllabary][non].sample
       result.add v.sample
 
 proc generateEnglishHissatsuwaza*(): string =
