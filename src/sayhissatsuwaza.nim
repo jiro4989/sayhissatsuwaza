@@ -1,4 +1,5 @@
-import tables, random, unicode
+import strutils, tables, random
+from unicode import toRunes
 
 type
   ElementType {.pure.} = enum
@@ -23,7 +24,7 @@ type
       fAttack: AttackType
 
   Syllabary {.pure.} = enum
-    ## 音節。
+    ## 音節。Language = jaの時だけ使用する。
     kanji, katakana
 
   Generator = object
@@ -31,6 +32,12 @@ type
     ## 命名ルールと言語。
     syllabary: Syllabary
     pattern: seq[Attribute]
+
+  Language* = enum
+    ja = "ja_JP"
+    en = "en_US"
+    zhCN = "zh_CN"
+    zhTW = "zh_TW"
 
 const
   # Element
@@ -93,13 +100,13 @@ const
     }.toTable,
   }.toTable
 
-proc generate*(): string =
-  ## 必殺技名をランダムに生成する。
+proc generateJapaneseHissatsuwaza*(): string =
+  ## 日本語の必殺技名をランダムに生成する。
   ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
   runnableExamples:
     import random
     randomize()
-    echo generate()
+    echo generateJapaneseHissatsuwaza()
 
   let gen = generators.sample
   for i, attr in gen.pattern:
@@ -119,12 +126,59 @@ proc generate*(): string =
         result.add elementWords[gen.syllabary][non].sample
       result.add v.sample
 
+proc generateEnglishHissatsuwaza*(): string =
+  ## 英語の必殺技名をランダムに生成する。
+  ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
+  runnableExamples:
+    import random
+    randomize()
+    echo generateEnglishHissatsuwaza()
+
+  # TODO
+  discard
+
+proc generateChineseCNHissatsuwaza*(): string =
+  ## 中国語(簡体字)の必殺技名をランダムに生成する。
+  ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
+  runnableExamples:
+    import random
+    randomize()
+    echo generateChineseCNHissatsuwaza()
+
+  # TODO
+  discard
+
+proc generateChineseTWHissatsuwaza*(): string =
+  ## 中国語(繁体字)の必殺技名をランダムに生成する。
+  ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
+  runnableExamples:
+    import random
+    randomize()
+    echo generateChineseTWHissatsuwaza()
+
+  # TODO
+  discard
+
+proc generate*(lang = ja): string =
+  ## 必殺技名をランダムに生成する。
+  ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
+  runnableExamples:
+    import random
+    randomize()
+    echo generate(ja)
+
+  case lang
+  of ja: generateJapaneseHissatsuwaza()
+  of en: generateEnglishHissatsuwaza()
+  of zhCN: generateChineseCNHissatsuwaza()
+  of zhTW: generateChineseTWHissatsuwaza()
+
 proc cGenerate*(): cstring {.exportc.} =
   ## JSバックエンド用。
   return generate().cstring
 
 when isMainModule and not defined js:
-  import strformat, logging
+  import strformat, logging, os
 
   const
     appName = "sayhissatsuwaza"
@@ -136,14 +190,30 @@ https://github.com/jiro4989/{appName}"""
 
   addHandler(newConsoleLogger(fmtStr = verboseFmtStr, useStderr = true))
 
+  proc getLanguage: Language =
+    ## 環境変数から言語を読み取ってenumオブジェクトに変換する。
+    result = ja
+    let envLang = getEnv("LANG")
+    if envLang == "": return
+    let lang = envLang.split(".")[0]
+    result =
+      case lang
+      of $ja: ja
+      of $en: en
+      of $zhCN: zhCN
+      of $zhTW: zhTW
+      else: ja
+
   proc sayhissatsuwaza(count = 1): int =
     if count <= 0:
       info "'count' parameter must be 1 or more."
       return 1
 
+    let lang = getLanguage()
+
     randomize()
     for i in 1..count:
-      echo generate()
+      echo generate(lang)
 
   import cligen
 
