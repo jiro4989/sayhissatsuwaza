@@ -110,7 +110,7 @@ const
 
   elementWordsCommon = {
     en: {
-      non: @["Absolute", "Power"],
+      non: @["Absolute", "Power", "Final"],
       fire: @["Fire"],
       ice: @["Ice"],
       wind: @["Wind", "Storm"],
@@ -154,7 +154,7 @@ const
   attackWordsCommon = {
     en: {
       slash: @["Slash", "Blade", "Sword"],
-      blow: @["Blow", "Attack", "Clash", "Break"],
+      blow: @["Blow", "Attack", "Clash", "Break", "Strike"],
       thrust: @["Thrust", "Pierce"],
     }.toTable,
     zhCN: {
@@ -191,14 +191,16 @@ proc generateJapaneseHissatsuwaza*(): string =
         result.add elementWordsJapanese[gen.syllabary][non].sample
       result.add attackWordsJapanese[gen.syllabary][attr.fAttack].sample
 
-proc generateCommon*(lang: Language): string =
+proc generateCommon*(lang: Language, whitespace = " "): string =
+  var ret: seq[string]
   let gen = generators.filterIt(it.lang == lang).sample
   for attr in gen.pattern:
     let v =
       case attr.kind
       of element: elementWordsCommon[lang][attr.fElement].sample
       of attack: attackWordsCommon[lang][attr.fAttack].sample
-    result.add v
+    ret.add v
+  result = ret.join(whitespace)
 
 proc generateEnglishHissatsuwaza*(): string =
   ## 英語の必殺技名をランダムに生成する。
@@ -218,7 +220,7 @@ proc generateChineseCNHissatsuwaza*(): string =
     randomize()
     echo generateChineseCNHissatsuwaza()
 
-  result = generateCommon(zhCN)
+  result = generateCommon(zhCN, "")
 
 proc generateChineseTWHissatsuwaza*(): string =
   ## 中国語(繁体字)の必殺技名をランダムに生成する。
@@ -228,7 +230,7 @@ proc generateChineseTWHissatsuwaza*(): string =
     randomize()
     echo generateChineseTWHissatsuwaza()
 
-  result = generateCommon(zhTW)
+  result = generateCommon(zhTW, "")
 
 proc generate*(lang = ja): string =
   ## 必殺技名をランダムに生成する。
