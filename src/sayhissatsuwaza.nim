@@ -1,4 +1,4 @@
-import strutils, tables, random
+import strutils, sequtils, tables, random
 from unicode import toRunes
 
 type
@@ -56,6 +56,7 @@ const
   attrThrust = Attribute(kind: attack, fAttack: thrust)
 
   generators = @[
+    # Japanese
     Generator(lang: ja, syllabary: kanji, pattern: @[attrFire, attrSlash]),
     Generator(lang: ja, syllabary: kanji, pattern: @[attrWind, attrThunder,
         attrBlow]),
@@ -67,6 +68,23 @@ const
     Generator(lang: ja, syllabary: katakana, pattern: @[attrHoly, attrThrust]),
     Generator(lang: ja, syllabary: katakana, pattern: @[attrNon, attrBlow]),
     Generator(lang: ja, syllabary: katakana, pattern: @[attrIce, attrWind]),
+
+    # English
+    Generator(lang: en, pattern: @[attrFire, attrSlash]),
+    Generator(lang: en, pattern: @[attrHoly, attrThrust]),
+    Generator(lang: en, pattern: @[attrNon, attrBlow]),
+    Generator(lang: en, pattern: @[attrIce, attrWind]),
+
+    # Chinese
+    Generator(lang: zhCN, pattern: @[attrFire, attrSlash]),
+    Generator(lang: zhCN, pattern: @[attrHoly, attrThrust]),
+    Generator(lang: zhCN, pattern: @[attrNon, attrBlow]),
+    Generator(lang: zhCN, pattern: @[attrIce, attrWind]),
+
+    Generator(lang: zhTW, pattern: @[attrFire, attrSlash]),
+    Generator(lang: zhTW, pattern: @[attrHoly, attrThrust]),
+    Generator(lang: zhTW, pattern: @[attrNon, attrBlow]),
+    Generator(lang: zhTW, pattern: @[attrIce, attrWind]),
   ]
 
   elementWordsJapanese = {
@@ -90,6 +108,36 @@ const
     }.toTable,
   }.toTable
 
+  elementWordsCommon = {
+    en: {
+      non: @["Absolute", "Power"],
+      fire: @["Fire"],
+      ice: @["Ice"],
+      wind: @["Wind", "Storm"],
+      thunder: @["Thunder", "Lightning"],
+      holy: @["Saint", "Shine", "Holy"],
+      darkness: @["Darkness"],
+    }.toTable,
+    zhCN: {
+      non: @["強", "業", "連", "列"],
+      fire: @["Fire"],
+      ice: @["Ice"],
+      wind: @["Wind", "Storm"],
+      thunder: @["Thunder", "Lightning"],
+      holy: @["Saint", "Shine", "Holy"],
+      darkness: @["Darkness"],
+    }.toTable,
+    zhTW: {
+      non: @["強", "業", "連", "列"],
+      fire: @["Fire"],
+      ice: @["Ice"],
+      wind: @["Wind", "Storm"],
+      thunder: @["Thunder", "Lightning"],
+      holy: @["Saint", "Shine", "Holy"],
+      darkness: @["Darkness"],
+    }.toTable,
+  }.toTable
+
   attackWordsJapanese = {
     kanji: {
       slash: @["斬", "剣", "刃"],
@@ -97,6 +145,24 @@ const
       thrust: @["突"],
     }.toTable,
     katakana: {
+      slash: @["スラッシュ", "ブレード", "ソード"],
+      blow: @["ブロウ", "クラッシュ", "アタック", "ブレイク"],
+      thrust: @["スラスト", "ピアース"],
+    }.toTable,
+  }.toTable
+
+  attackWordsCommon = {
+    en: {
+      slash: @["Slash", "Blade", "Sword"],
+      blow: @["Blow", "Attack", "Clash", "Break"],
+      thrust: @["Thrust", "Pierce"],
+    }.toTable,
+    zhCN: {
+      slash: @["スラッシュ", "ブレード", "ソード"],
+      blow: @["ブロウ", "クラッシュ", "アタック", "ブレイク"],
+      thrust: @["スラスト", "ピアース"],
+    }.toTable,
+    zhTW: {
       slash: @["スラッシュ", "ブレード", "ソード"],
       blow: @["ブロウ", "クラッシュ", "アタック", "ブレイク"],
       thrust: @["スラスト", "ピアース"],
@@ -111,7 +177,7 @@ proc generateJapaneseHissatsuwaza*(): string =
     randomize()
     echo generateJapaneseHissatsuwaza()
 
-  let gen = generators.sample
+  let gen = generators.filterIt(it.lang == ja).sample
   for i, attr in gen.pattern:
     case attr.kind
     of element:
@@ -129,6 +195,15 @@ proc generateJapaneseHissatsuwaza*(): string =
         result.add elementWordsJapanese[gen.syllabary][non].sample
       result.add v.sample
 
+proc generateCommon*(lang: Language): string =
+  let gen = generators.filterIt(it.lang == lang).sample
+  for attr in gen.pattern:
+    let v =
+      case attr.kind
+      of element: elementWordsCommon[lang][attr.fElement].sample
+      of attack: attackWordsCommon[lang][attr.fAttack].sample
+    result.add v
+
 proc generateEnglishHissatsuwaza*(): string =
   ## 英語の必殺技名をランダムに生成する。
   ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
@@ -137,8 +212,7 @@ proc generateEnglishHissatsuwaza*(): string =
     randomize()
     echo generateEnglishHissatsuwaza()
 
-  # TODO
-  discard
+  result = generateCommon(en)
 
 proc generateChineseCNHissatsuwaza*(): string =
   ## 中国語(簡体字)の必殺技名をランダムに生成する。
@@ -148,8 +222,7 @@ proc generateChineseCNHissatsuwaza*(): string =
     randomize()
     echo generateChineseCNHissatsuwaza()
 
-  # TODO
-  discard
+  result = generateCommon(zhCN)
 
 proc generateChineseTWHissatsuwaza*(): string =
   ## 中国語(繁体字)の必殺技名をランダムに生成する。
@@ -159,8 +232,7 @@ proc generateChineseTWHissatsuwaza*(): string =
     randomize()
     echo generateChineseTWHissatsuwaza()
 
-  # TODO
-  discard
+  result = generateCommon(zhTW)
 
 proc generate*(lang = ja): string =
   ## 必殺技名をランダムに生成する。
