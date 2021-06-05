@@ -16,5 +16,6 @@ proc generateCommon*(generators: seq[Generator],
       case attr.kind
       of element: elementWords[lang][attr.fElement].sample
       of attack: attackWords[lang][attr.fAttack].sample
+      else: ""
     ret.add v
   result = ret.join(whitespace)

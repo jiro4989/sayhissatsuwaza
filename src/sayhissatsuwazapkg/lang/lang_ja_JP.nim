@@ -73,3 +73,4 @@ proc generate*(): string =
           result.toRunes.len mod 2 == 1:
         result.add elementWords[gen.syllabary][non].sample
       result.add attackWords[gen.syllabary][attr.fAttack].sample
+    else: discard
