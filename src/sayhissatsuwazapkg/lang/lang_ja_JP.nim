@@ -56,7 +56,8 @@ func cond(p: PartOfSpeech, a: seq[Attribute]): SearchCondition =
 
 const
   words = concat(
-    elems(@["火炎", "紅蓮", "炎", "爆炎", "炎帝", "黒炎"], @[fire, kanji]),
+    elems(@["火炎", "紅蓮", "炎", "爆炎", "炎帝", "黒炎"], @[fire,
+        kanji]),
     elems(@["氷結", "氷"], @[ice, kanji]),
     elems(@["風神", "疾風", "旋風", "風"], @[wind, kanji]),
     elems(@["雷", "雷神", "雷光", "雷鳴", "電光"], @[thunder, kanji]),
@@ -77,7 +78,8 @@ const
     atks(@["突"], @[thrust, kanji]),
 
     atks(@["スラッシュ", "ブレード", "ソード"], @[slash, katakana]),
-    atks(@["ブロウ", "クラッシュ", "アタック", "ブレイク"], @[blow, katakana]),
+    atks(@["ブロウ", "クラッシュ", "アタック", "ブレイク"], @[
+        blow, katakana]),
     atks(@["スラスト", "ピアース"], @[thrust, katakana]),
 
   )
@@ -111,7 +113,8 @@ proc generate*(): string =
     if pattern.len == i+1 and
         kanji in cond.attrs and
         result.toRunes.len mod 2 == 1:
-      let matched = words.search(SearchCondition(partOfSpeech: noun, attrs: @[kanji, assist]))
+      let matched = words.search(SearchCondition(partOfSpeech: noun, attrs: @[
+          kanji, assist]))
       if 0 < matched.len:
         result.add matched.sample.text
     result.add word.text
