@@ -1,42 +1,50 @@
-import tables
+import sequtils, random
 
-import ../types
-import ../utils
+import ../types2
+import ../utils2
 
 const
-  generators = @[
-    Generator(lang: zhTW, pattern: @[attrFire, attrSlash]),
-    Generator(lang: zhTW, pattern: @[attrHoly, attrThrust]),
-    Generator(lang: zhTW, pattern: @[attrNon, attrBlow]),
-    Generator(lang: zhTW, pattern: @[attrIce, attrWind]),
+  words = concat(
+    concat(
+      combine(noun, @["火焰", "紅蓮", "爆炸"], @[fire]),
+      combine(noun, @["凍結", "冰"], @[ice]),
+      combine(noun, @["旋風"], @[wind]),
+      combine(noun, @["雷神"], @[thunder]),
+      combine(noun, @["光", "聖"], @[holy]),
+      combine(noun, @["黑暗"], @[darkness]),
+    ).addAttr(element),
+    concat(
+      combine(noun, @["殺", "刀", "劍"], @[slash]),
+      combine(noun, @["打"], @[blow]),
+      combine(noun, @["刺"], @[thrust]),
+    ).addAttr(attack),
+    combine(noun, @["強"], @[assist]),
+  )
+
+  patterns = @[
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[assist]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[ice]),
+      SearchCondition(partOfSpeech: noun, attrs: @[wind]),
+    ],
   ]
 
-  elementWords = {
-    zhTW: {
-      non: @["強"],
-      fire: @["火焰", "紅蓮", "爆炸"],
-      ice: @["凍結", "冰"],
-      wind: @["旋風"],
-      thunder: @["雷神"],
-      holy: @["光", "聖"],
-      darkness: @["黑暗"],
-    }.toTable,
-  }.toTable
-
-  attackWords = {
-    zhTW: {
-      slash: @["殺", "刀", "劍"],
-      blow: @["打"],
-      thrust: @["刺"],
-    }.toTable,
-  }.toTable
-
 proc generate*(): string =
-  ## 中国語(繁体字)の必殺技名をランダムに生成する。
+  ## 英語の必殺技名をランダムに生成する。
   ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
   runnableExamples:
     import random
     randomize()
     echo generate()
 
-  result = generateCommon(generators, elementWords, attackWords, zhTW, "")
+  let pattern = patterns.sample
+  for i, cond in pattern:
+    let word = words.search(cond).sample
+    result.add word.text
