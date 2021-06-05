@@ -1,35 +1,40 @@
-import tables
+import sequtils, random
 
 import ../types
 import ../utils
 
 const
-  generators = @[
-    Generator(lang: zhCN, pattern: @[attrFire, attrSlash]),
-    Generator(lang: zhCN, pattern: @[attrHoly, attrThrust]),
-    Generator(lang: zhCN, pattern: @[attrNon, attrBlow]),
-    Generator(lang: zhCN, pattern: @[attrIce, attrWind]),
+  words = concat(
+    concat(
+      combine(noun, @["火焰", "红莲", "爆炸"], @[fire]),
+      combine(noun, @["冷冻"], @[ice]),
+      combine(noun, @["旋风"], @[wind]),
+      combine(noun, @["雷神"], @[thunder]),
+      combine(noun, @["光"], @[holy]),
+      combine(noun, @["黑暗"], @[darkness]),
+    ).addAttr(element),
+    concat(
+      combine(noun, @["剑", "刀"], @[slash]),
+      combine(noun, @["打"], @[blow]),
+      combine(noun, @["剑"], @[thrust]),
+    ).addAttr(attack),
+    combine(noun, @["强"], @[assist]),
+  )
+
+  patterns = @[
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[assist]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[ice]),
+      SearchCondition(partOfSpeech: noun, attrs: @[wind]),
+    ],
   ]
-
-  elementWords = {
-    zhCN: {
-      non: @["强"],
-      fire: @["火焰", "红莲", "爆炸"],
-      ice: @["冷冻"],
-      wind: @["旋风"],
-      thunder: @["雷神"],
-      holy: @["光"],
-      darkness: @["黑暗"],
-    }.toTable,
-  }.toTable
-
-  attackWords = {
-    zhCN: {
-      slash: @["剑", "刀"],
-      blow: @["打"],
-      thrust: @["剑"],
-    }.toTable,
-  }.toTable
 
 proc generate*(): string =
   ## 中国語(簡体字)の必殺技名をランダムに生成する。
@@ -39,4 +44,7 @@ proc generate*(): string =
     randomize()
     echo generate()
 
-  result = generateCommon(generators, elementWords, attackWords, zhCN, "")
+  let pattern = patterns.sample
+  for i, cond in pattern:
+    let word = words.search(cond).sample
+    result.add word.text

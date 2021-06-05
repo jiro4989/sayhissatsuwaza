@@ -1,8 +1,8 @@
 import random, sequtils
 from unicode import toRunes
 
-import ../types2
-import ../utils2
+import ../types
+import ../utils
 
 const
   words = concat(

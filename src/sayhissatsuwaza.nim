@@ -38,7 +38,7 @@ when isMainModule and not defined js:
   const
     appName = "sayhissatsuwaza"
     version = &"""
-{appName} command version 0.6.0
+{appName} command version 0.7.0
 Copyright (c) 2021 jiro4989
 Released under the MIT License.
 https://github.com/jiro4989/{appName}"""
