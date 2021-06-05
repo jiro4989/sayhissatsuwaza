@@ -12,9 +12,6 @@ func addAttr*(words: seq[Word], attr: Attribute): seq[Word] =
     w.attrs.add attr
     result.add w
 
-func cond*(p: PartOfSpeech, a: seq[Attribute]): SearchCondition =
-  SearchCondition(partOfSpeech: p, attrs: a)
-
 proc search*(words: seq[Word], cond: SearchCondition): seq[Word] =
   result = words
   # 品詞で絞り込み
