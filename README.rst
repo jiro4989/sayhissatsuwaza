@@ -83,8 +83,15 @@ Command
    $ sayhissatsuwaza
    Final Break
 
-対応言語
-^^^^^^^
+Web
+------------
+
+GitHub PagesにてWebUIからも必殺技を生成できるようにしている。
+
+https://jiro4989.github.io/sayhissatsuwaza/
+
+Supported Languages
+===================
 
 以下の言語に対応していますが、日本語以外の言語の必殺技は正しいのかどうか正直わからないです。
 日本語以外の言語圏における必殺技に明るい方からのPull requestお待ちしてます。
@@ -92,13 +99,6 @@ Command
 * 日本語
 * 英語
 * 中国語
-
-Web
-------------
-
-GitHub PagesにてWebUIからも必殺技を生成できるようにしている。
-
-https://jiro4989.github.io/sayhissatsuwaza/
 
 Pull request
 ============
