@@ -8,8 +8,7 @@ const
     Generator(lang: zhCN, pattern: @[attrHoly, attrThrust]),
     Generator(lang: zhCN, pattern: @[attrNon, attrBlow]),
     Generator(lang: zhCN, pattern: @[attrIce, attrWind]),
-    Generator(lang: zhCN, pattern: @[attrVerbCommon, attrNounCommon,
-        attrSlash]),
+    Generator(lang: zhCN, pattern: @[attrVerbCommon, attrNounCommon, attrSlash]),
   ]
 
   elementWords = {

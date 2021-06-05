@@ -20,7 +20,7 @@ type
     element,
     attack,
     verb, # 動詞
-    noun  # 名詞
+    noun # 名詞
 
   Attribute* = object
     ## ElementとAttackをラップして1つの型にラッピングしたもの。
