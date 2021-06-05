@@ -1,8 +1,6 @@
 import tables, random, sequtils
 from unicode import toRunes
 
-# import ../types
-
 type
   Attribute = enum
     kanji, katakana,
@@ -64,7 +62,7 @@ const
     elems(@["聖", "光"], @[holy, kanji]),
     elems(@["闇", "暗黒"], @[darkness, kanji]),
 
-    assistWords(@["強", "業", "連", "列"], @[kanji]),
+    assistWords(@["業", "連", "裂"], @[kanji]),
 
     elems(@["ファイア", "フレイム"], @[fire, katakana]),
     elems(@["アイス", "アイシクル", "フリーズ"], @[ice, katakana]),
@@ -87,6 +85,8 @@ const
   patterns = @[
     @[cond(noun, @[kanji, element]), cond(noun, @[kanji, attack])],
     @[cond(noun, @[katakana, element]), cond(noun, @[katakana, attack])],
+    @[cond(noun, @[kanji, assist]), cond(noun, @[kanji, element]), cond(noun, @[kanji, attack])],
+    @[cond(noun, @[kanji, wind]), cond(noun, @[kanji, thunder]), cond(noun, @[kanji, attack])],
   ]
 
 proc search(words: seq[Word], cond: SearchCondition): seq[Word] =
@@ -113,8 +113,9 @@ proc generate*(): string =
     if pattern.len == i+1 and
         kanji in cond.attrs and
         result.toRunes.len mod 2 == 1:
-      let matched = words.search(SearchCondition(partOfSpeech: noun, attrs: @[
-          kanji, assist]))
+      let matched = words
+        .search(SearchCondition(partOfSpeech: noun, attrs: @[kanji, assist]))
+        .filterIt(it.text.toRunes[0] notin result.toRunes)
       if 0 < matched.len:
         result.add matched.sample.text
     result.add word.text
