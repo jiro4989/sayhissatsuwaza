@@ -22,64 +22,53 @@ type
     partOfSpeech: PartOfSpeech
     attrs: seq[Attribute]
 
-func atk(text: string, attrs: seq[Attribute]): Word =
-  var a = @[attack]
-  a.add attrs
-  result = Word(partOfSpeech: noun, attrs: a, text: text)
-
-func atks(texts: seq[string], attrs: seq[Attribute]): seq[Word] =
+func combine(part: PartOfSpeech, texts: seq[string], attrs: seq[Attribute]): seq[Word] =
   for text in texts:
-    result.add atk(text, attrs)
+    result.add Word(partOfSpeech: part, text: text, attrs: attrs)
 
-func elem(text: string, attrs: seq[Attribute]): Word =
-  var a = @[element]
-  a.add attrs
-  result = Word(partOfSpeech: noun, attrs: a, text: text)
-
-func elems(texts: seq[string], attrs: seq[Attribute]): seq[Word] =
-  for text in texts:
-    result.add elem(text, attrs)
-
-func assistWord(text: string, attrs: seq[Attribute]): Word =
-  var a = @[assist]
-  a.add attrs
-  result = Word(partOfSpeech: noun, attrs: a, text: text)
-
-func assistWords(texts: seq[string], attrs: seq[Attribute]): seq[Word] =
-  for text in texts:
-    result.add assistWord(text, attrs)
+func addAttr(words: seq[Word], attr: Attribute): seq[Word] =
+  for word in words:
+    var w = word
+    w.attrs.add attr
+    result.add w
 
 func cond(p: PartOfSpeech, a: seq[Attribute]): SearchCondition =
   SearchCondition(partOfSpeech: p, attrs: a)
 
 const
   words = concat(
-    elems(@["火炎", "紅蓮", "炎", "爆炎", "炎帝", "黒炎"], @[fire,
-        kanji]),
-    elems(@["氷結", "氷"], @[ice, kanji]),
-    elems(@["風神", "疾風", "旋風", "風"], @[wind, kanji]),
-    elems(@["雷", "雷神", "雷光", "雷鳴", "電光"], @[thunder, kanji]),
-    elems(@["聖", "光"], @[holy, kanji]),
-    elems(@["闇", "暗黒"], @[darkness, kanji]),
+    concat(
+      concat(
+        combine(noun, @["火炎", "紅蓮", "炎", "爆炎", "炎帝", "黒炎"], @[fire]),
+        combine(noun, @["氷結", "氷"], @[ice]),
+        combine(noun, @["風神", "疾風", "旋風", "風"], @[wind]),
+        combine(noun, @["雷", "雷神", "雷光", "雷鳴", "電光"], @[thunder]),
+        combine(noun, @["聖", "光"], @[holy]),
+        combine(noun, @["闇", "暗黒"], @[darkness]),
+      ).addAttr(element),
+      concat(
+        combine(noun, @["斬", "剣", "刃"], @[slash]),
+        combine(noun, @["撃", "掌"], @[blow]),
+        combine(noun, @["突"], @[thrust]),
+      ).addAttr(attack),
+      combine(noun, @["業", "連", "裂"], @[assist]),
+    ).addAttr(kanji),
 
-    assistWords(@["業", "連", "裂"], @[kanji]),
-
-    elems(@["ファイア", "フレイム"], @[fire, katakana]),
-    elems(@["アイス", "アイシクル", "フリーズ"], @[ice, katakana]),
-    elems(@["ウィンド", "ストーム"], @[wind, katakana]),
-    elems(@["サンダー", "プラズマ"], @[thunder, katakana]),
-    elems(@["セイント", "ホーリー", "ライト"], @[holy, katakana]),
-    elems(@["ダーク", "ダークネス"], @[darkness, katakana]),
-
-    atks(@["斬", "剣", "刃"], @[slash, kanji]),
-    atks(@["撃", "掌"], @[blow, kanji]),
-    atks(@["突"], @[thrust, kanji]),
-
-    atks(@["スラッシュ", "ブレード", "ソード"], @[slash, katakana]),
-    atks(@["ブロウ", "クラッシュ", "アタック", "ブレイク"], @[
-        blow, katakana]),
-    atks(@["スラスト", "ピアース"], @[thrust, katakana]),
-
+    concat(
+      concat(
+        combine(noun, @["ファイア", "フレイム"], @[fire]),
+        combine(noun, @["アイス", "アイシクル", "フリーズ"], @[ice]),
+        combine(noun, @["ウィンド", "ストーム"], @[wind]),
+        combine(noun, @["サンダー", "プラズマ"], @[thunder]),
+        combine(noun, @["セイント", "ホーリー", "ライト"], @[holy]),
+        combine(noun, @["ダーク", "ダークネス"], @[darkness]),
+      ).addAttr(element),
+      concat(
+        combine(noun, @["スラッシュ", "ブレード", "ソード"], @[slash]),
+        combine(noun, @["ブロウ", "クラッシュ", "アタック", "ブレイク"], @[blow]),
+        combine(noun, @["スラスト", "ピアース"], @[thrust]),
+      ).addAttr(attack),
+    ).addAttr(katakana),
   )
 
   patterns = @[
