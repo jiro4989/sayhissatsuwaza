@@ -1,40 +1,8 @@
 import random, sequtils
 from unicode import toRunes
 
-type
-  Attribute = enum
-    kanji, katakana,
-    element, non, fire, ice, wind, thunder, holy, darkness,
-    attack, slash, blow, thrust,
-    assist
-
-  PartOfSpeech {.pure.} = enum
-    ## 品詞。
-    verb, # 動詞
-    noun  # 名詞
-
-  Word = object
-    partOfSpeech: PartOfSpeech
-    attrs: seq[Attribute]
-    text: string
-
-  SearchCondition = object
-    partOfSpeech: PartOfSpeech
-    attrs: seq[Attribute]
-
-func combine(part: PartOfSpeech, texts: seq[string], attrs: seq[
-    Attribute]): seq[Word] =
-  for text in texts:
-    result.add Word(partOfSpeech: part, text: text, attrs: attrs)
-
-func addAttr(words: seq[Word], attr: Attribute): seq[Word] =
-  for word in words:
-    var w = word
-    w.attrs.add attr
-    result.add w
-
-func cond(p: PartOfSpeech, a: seq[Attribute]): SearchCondition =
-  SearchCondition(partOfSpeech: p, attrs: a)
+import ../types2
+import ../utils2
 
 const
   words = concat(
@@ -78,21 +46,25 @@ const
   )
 
   patterns = @[
-    @[cond(noun, @[kanji, element]), cond(noun, @[kanji, attack])],
-    @[cond(noun, @[katakana, element]), cond(noun, @[katakana, attack])],
-    @[cond(noun, @[kanji, assist]), cond(noun, @[kanji, element]), cond(noun, @[
-        kanji, attack])],
-    @[cond(noun, @[kanji, wind]), cond(noun, @[kanji, thunder]), cond(noun, @[
-        kanji, attack])],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[katakana, element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[katakana, attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, assist]),
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, wind]),
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, thunder]),
+      SearchCondition(partOfSpeech: noun, attrs: @[kanji, attack]),
+    ],
   ]
-
-proc search(words: seq[Word], cond: SearchCondition): seq[Word] =
-  result = words
-  # 品詞で絞り込み
-  result = result.filterIt(it.partOfSpeech == cond.partOfSpeech)
-  # conditionの属性すべてを満たすwordに絞り込みj
-  for attr in cond.attrs:
-    result = result.filterIt(attr in it.attrs)
 
 proc generate*(): string =
   ## 日本語の必殺技名をランダムに生成する。

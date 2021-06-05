@@ -1,35 +1,44 @@
-import tables
+import sequtils, random
 
-import ../types
-import ../utils
+import ../types2
+import ../utils2
 
 const
-  generators = @[
-    Generator(lang: en, pattern: @[attrFire, attrSlash]),
-    Generator(lang: en, pattern: @[attrHoly, attrThrust]),
-    Generator(lang: en, pattern: @[attrNon, attrBlow]),
-    Generator(lang: en, pattern: @[attrIce, attrWind]),
+  words = concat(
+    concat(
+      combine(noun, @["Fire"], @[fire]),
+      combine(noun, @["Ice"], @[ice]),
+      combine(noun, @["Wind", "Storm"], @[wind]),
+      combine(noun, @["Thunder", "Lightning"], @[thunder]),
+      combine(noun, @["Saint", "Shine", "Holy"], @[holy]),
+      combine(noun, @["Darkness"], @[darkness]),
+    ).addAttr(element),
+    concat(
+      combine(noun, @["Slash", "Blade", "Sword"], @[slash]),
+      combine(noun, @["Blow", "Attack", "Clash", "Break", "Strike"], @[blow]),
+      combine(noun, @["Thrust", "Pierce"], @[thrust]),
+    ).addAttr(attack),
+    combine(noun, @["Absolute", "Power", "Final"], @[assist]),
+  )
+
+  patterns = @[
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[assist]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: noun, attrs: @[ice]),
+      SearchCondition(partOfSpeech: noun, attrs: @[wind]),
+    ],
   ]
-
-  elementWords = {
-    en: {
-      non: @["Absolute", "Power", "Final"],
-      fire: @["Fire"],
-      ice: @["Ice"],
-      wind: @["Wind", "Storm"],
-      thunder: @["Thunder", "Lightning"],
-      holy: @["Saint", "Shine", "Holy"],
-      darkness: @["Darkness"],
-    }.toTable,
-  }.toTable
-
-  attackWords = {
-    en: {
-      slash: @["Slash", "Blade", "Sword"],
-      blow: @["Blow", "Attack", "Clash", "Break", "Strike"],
-      thrust: @["Thrust", "Pierce"],
-    }.toTable,
-  }.toTable
 
 proc generate*(): string =
   ## 英語の必殺技名をランダムに生成する。
@@ -39,4 +48,7 @@ proc generate*(): string =
     randomize()
     echo generate()
 
-  result = generateCommon(generators, elementWords, attackWords, en)
+  let pattern = patterns.sample
+  for i, cond in pattern:
+    let word = words.search(cond).sample
+    result.add word.text
