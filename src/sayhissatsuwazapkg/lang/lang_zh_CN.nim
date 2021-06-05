@@ -2,6 +2,16 @@ import tables, random
 
 import ../types
 
+type
+  PartOfSpeech {.pure.} = enum
+    ## 品詞。
+    verb, # 動詞
+    noun  # 名詞
+
+  Word = object
+    partOfSpeech: PartOfSpeech
+    text: string
+
 const
   generators = @[
     Generator(lang: zhCN, pattern: @[attrFire, attrSlash]),
