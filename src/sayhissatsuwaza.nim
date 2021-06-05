@@ -18,9 +18,19 @@ proc generate*(lang = ja): string =
   of zhCN: lang_zh_CN.generate()
   of zhTW: lang_zh_TW.generate()
 
-proc cGenerate*(): cstring {.exportc.} =
+func languageCode2Language(lang: string): Language =
+  result =
+    case lang
+    of $ja: ja
+    of $en: en
+    of $zhCN: zhCN
+    of $zhTW: zhTW
+    else: ja
+
+proc cGenerate*(lang = cstring"ja_JP"): cstring {.exportc.} =
   ## JSバックエンド用。
-  return generate().cstring
+  let l = ($lang).languageCode2Language
+  return generate(l).cstring
 
 when isMainModule and not defined js:
   import strutils, strformat, logging, os, random
@@ -34,15 +44,6 @@ Released under the MIT License.
 https://github.com/jiro4989/{appName}"""
 
   addHandler(newConsoleLogger(fmtStr = verboseFmtStr, useStderr = true))
-
-  func languageCode2Language(lang: string): Language =
-    result =
-      case lang
-      of $ja: ja
-      of $en: en
-      of $zhCN: zhCN
-      of $zhTW: zhTW
-      else: ja
 
   proc getLanguageByEnv: Language =
     ## 環境変数から言語を読み取ってenumオブジェクトに変換する。

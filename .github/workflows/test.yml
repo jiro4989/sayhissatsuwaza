@@ -31,5 +31,5 @@ jobs:
         with:
           nim-version: ${{ env.NIM_VERSION }}
       - run: nimble build -Y
-      - run: nimble jsBuild
+      - run: nimble buildjs
       - run: nimble test -Y
