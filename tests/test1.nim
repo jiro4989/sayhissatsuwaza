@@ -4,4 +4,4 @@ import sayhissatsuwaza
 
 test "proc generate":
   for i in 1..1000:
-    echo generate(zhCN)
+    echo generate()
