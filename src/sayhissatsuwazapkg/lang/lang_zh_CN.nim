@@ -19,6 +19,11 @@ const
       combine(noun, @["剑"], @[thrust]),
     ).addAttr(attack),
     combine(noun, @["强"], @[assist]),
+    combine(verb, @["夺", "辟"], @[]),
+    combine(noun, @["命", "魂", "魔"], @[attrObject]),
+    combine(noun, @["剑法", "刀法"], @[technique]),
+    combine(noun, @["十字"], @[shape]),
+    combine(noun, @["十", "十五", "百", "千"], @[Attribute.count]),
   )
 
   patterns = @[
@@ -27,12 +32,25 @@ const
       SearchCondition(partOfSpeech: noun, attrs: @[attack]),
     ],
     @[
-      SearchCondition(partOfSpeech: noun, attrs: @[assist]),
-      SearchCondition(partOfSpeech: noun, attrs: @[attack]),
+      SearchCondition(partOfSpeech: noun, attrs: @[element]),
+      SearchCondition(partOfSpeech: noun, attrs: @[technique]),
     ],
     @[
-      SearchCondition(partOfSpeech: noun, attrs: @[ice]),
-      SearchCondition(partOfSpeech: noun, attrs: @[wind]),
+      SearchCondition(partOfSpeech: verb, attrs: @[]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attrObject]),
+      SearchCondition(partOfSpeech: noun, attrs: @[technique]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: verb, attrs: @[]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attrObject]),
+      SearchCondition(partOfSpeech: noun, attrs: @[shape]),
+      SearchCondition(partOfSpeech: noun, attrs: @[slash]),
+    ],
+    @[
+      SearchCondition(partOfSpeech: verb, attrs: @[]),
+      SearchCondition(partOfSpeech: noun, attrs: @[attrObject]),
+      SearchCondition(partOfSpeech: noun, attrs: @[Attribute.count]),
+      SearchCondition(partOfSpeech: noun, attrs: @[slash]),
     ],
   ]
 
