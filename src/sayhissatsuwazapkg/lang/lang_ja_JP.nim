@@ -22,7 +22,8 @@ type
     partOfSpeech: PartOfSpeech
     attrs: seq[Attribute]
 
-func combine(part: PartOfSpeech, texts: seq[string], attrs: seq[Attribute]): seq[Word] =
+func combine(part: PartOfSpeech, texts: seq[string], attrs: seq[
+    Attribute]): seq[Word] =
   for text in texts:
     result.add Word(partOfSpeech: part, text: text, attrs: attrs)
 
@@ -39,36 +40,41 @@ const
   words = concat(
     concat(
       concat(
-        combine(noun, @["火炎", "紅蓮", "炎", "爆炎", "炎帝", "黒炎"], @[fire]),
+        combine(noun, @["火炎", "紅蓮", "炎", "爆炎", "炎帝",
+            "黒炎"], @[fire]),
         combine(noun, @["氷結", "氷"], @[ice]),
         combine(noun, @["風神", "疾風", "旋風", "風"], @[wind]),
-        combine(noun, @["雷", "雷神", "雷光", "雷鳴", "電光"], @[thunder]),
+        combine(noun, @["雷", "雷神", "雷光", "雷鳴", "電光"], @[
+            thunder]),
         combine(noun, @["聖", "光"], @[holy]),
         combine(noun, @["闇", "暗黒"], @[darkness]),
-      ).addAttr(element),
-      concat(
-        combine(noun, @["斬", "剣", "刃"], @[slash]),
-        combine(noun, @["撃", "掌"], @[blow]),
-        combine(noun, @["突"], @[thrust]),
-      ).addAttr(attack),
-      combine(noun, @["業", "連", "裂"], @[assist]),
-    ).addAttr(kanji),
+    ).addAttr(element),
+    concat(
+      combine(noun, @["斬", "剣", "刃"], @[slash]),
+      combine(noun, @["撃", "掌"], @[blow]),
+      combine(noun, @["突"], @[thrust]),
+    ).addAttr(attack),
+    combine(noun, @["業", "連", "裂"], @[assist]),
+  ).addAttr(kanji),
 
     concat(
       concat(
         combine(noun, @["ファイア", "フレイム"], @[fire]),
-        combine(noun, @["アイス", "アイシクル", "フリーズ"], @[ice]),
+        combine(noun, @["アイス", "アイシクル", "フリーズ"], @[
+            ice]),
         combine(noun, @["ウィンド", "ストーム"], @[wind]),
         combine(noun, @["サンダー", "プラズマ"], @[thunder]),
         combine(noun, @["セイント", "ホーリー", "ライト"], @[holy]),
         combine(noun, @["ダーク", "ダークネス"], @[darkness]),
-      ).addAttr(element),
-      concat(
-        combine(noun, @["スラッシュ", "ブレード", "ソード"], @[slash]),
-        combine(noun, @["ブロウ", "クラッシュ", "アタック", "ブレイク"], @[blow]),
-        combine(noun, @["スラスト", "ピアース"], @[thrust]),
-      ).addAttr(attack),
-    ).addAttr(katakana),
+    ).addAttr(element),
+    concat(
+      combine(noun, @["スラッシュ", "ブレード", "ソード"], @[
+          slash]),
+      combine(noun, @["ブロウ", "クラッシュ", "アタック",
+          "ブレイク"], @[blow]),
+      combine(noun, @["スラスト", "ピアース"], @[thrust]),
+    ).addAttr(attack),
+  ).addAttr(katakana),
   )
 
   patterns = @[
