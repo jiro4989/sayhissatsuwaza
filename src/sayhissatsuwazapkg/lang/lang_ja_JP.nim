@@ -48,14 +48,14 @@ const
             thunder]),
         combine(noun, @["聖", "光"], @[holy]),
         combine(noun, @["闇", "暗黒"], @[darkness]),
-    ).addAttr(element),
-    concat(
-      combine(noun, @["斬", "剣", "刃"], @[slash]),
-      combine(noun, @["撃", "掌"], @[blow]),
-      combine(noun, @["突"], @[thrust]),
-    ).addAttr(attack),
-    combine(noun, @["業", "連", "裂"], @[assist]),
-  ).addAttr(kanji),
+      ).addAttr(element),
+      concat(
+        combine(noun, @["斬", "剣", "刃"], @[slash]),
+        combine(noun, @["撃", "掌"], @[blow]),
+        combine(noun, @["突"], @[thrust]),
+      ).addAttr(attack),
+      combine(noun, @["業", "連", "裂"], @[assist]),
+    ).addAttr(kanji),
 
     concat(
       concat(
@@ -66,15 +66,15 @@ const
         combine(noun, @["サンダー", "プラズマ"], @[thunder]),
         combine(noun, @["セイント", "ホーリー", "ライト"], @[holy]),
         combine(noun, @["ダーク", "ダークネス"], @[darkness]),
-    ).addAttr(element),
-    concat(
-      combine(noun, @["スラッシュ", "ブレード", "ソード"], @[
-          slash]),
-      combine(noun, @["ブロウ", "クラッシュ", "アタック",
-          "ブレイク"], @[blow]),
-      combine(noun, @["スラスト", "ピアース"], @[thrust]),
-    ).addAttr(attack),
-  ).addAttr(katakana),
+      ).addAttr(element),
+      concat(
+        combine(noun, @["スラッシュ", "ブレード", "ソード"], @[
+            slash]),
+        combine(noun, @["ブロウ", "クラッシュ", "アタック",
+            "ブレイク"], @[blow]),
+        combine(noun, @["スラスト", "ピアース"], @[thrust]),
+      ).addAttr(attack),
+    ).addAttr(katakana),
   )
 
   patterns = @[
