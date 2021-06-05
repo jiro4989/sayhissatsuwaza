@@ -1,4 +1,4 @@
-import tables, random, sequtils
+import random, sequtils
 from unicode import toRunes
 
 type
