@@ -3,7 +3,6 @@ import sayhissatsuwazapkg/lang/lang_ja_JP
 import sayhissatsuwazapkg/lang/lang_en_US
 import sayhissatsuwazapkg/lang/lang_zh_CN
 import sayhissatsuwazapkg/lang/lang_zh_TW
-export types
 
 proc generate*(lang = ja): string =
   ## 必殺技名をランダムに生成する。

@@ -7,20 +7,9 @@ type
     ## 攻撃の種類。斬撃、打撃、刺突。
     slash, blow, thrust
 
-  VerbType* {.pure.} = enum
-    ## 動詞の種類。
-    common
-
-  NounType* {.pure.} = enum
-    ## 名詞の種類。
-    common
-
   Kind* {.pure.} = enum
     ## 属性の種類。
-    element,
-    attack,
-    verb, # 動詞
-    noun # 名詞
+    element, attack
 
   Attribute* = object
     ## ElementとAttackをラップして1つの型にラッピングしたもの。
@@ -30,10 +19,6 @@ type
       fElement*: ElementType
     of attack:
       fAttack*: AttackType
-    of verb:
-      fVerb*: VerbType
-    of noun:
-      fNoun*: NounType
 
   Syllabary* {.pure.} = enum
     ## 音節。Language = jaの時だけ使用する。
@@ -66,9 +51,3 @@ const
   attrSlash* = Attribute(kind: attack, fAttack: slash)
   attrBlow* = Attribute(kind: attack, fAttack: blow)
   attrThrust* = Attribute(kind: attack, fAttack: thrust)
-
-  # Verb
-  attrVerbCommon* = Attribute(kind: verb, fVerb: VerbType.common)
-
-  # Noun
-  attrNounCommon* = Attribute(kind: noun, fNoun: NounType.common)
