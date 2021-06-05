@@ -85,8 +85,10 @@ const
   patterns = @[
     @[cond(noun, @[kanji, element]), cond(noun, @[kanji, attack])],
     @[cond(noun, @[katakana, element]), cond(noun, @[katakana, attack])],
-    @[cond(noun, @[kanji, assist]), cond(noun, @[kanji, element]), cond(noun, @[kanji, attack])],
-    @[cond(noun, @[kanji, wind]), cond(noun, @[kanji, thunder]), cond(noun, @[kanji, attack])],
+    @[cond(noun, @[kanji, assist]), cond(noun, @[kanji, element]), cond(noun, @[
+        kanji, attack])],
+    @[cond(noun, @[kanji, wind]), cond(noun, @[kanji, thunder]), cond(noun, @[
+        kanji, attack])],
   ]
 
 proc search(words: seq[Word], cond: SearchCondition): seq[Word] =
