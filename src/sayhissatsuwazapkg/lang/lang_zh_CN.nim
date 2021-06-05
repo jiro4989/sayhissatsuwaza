@@ -37,7 +37,7 @@ const
   ]
 
 proc generate*(): string =
-  ## 英語の必殺技名をランダムに生成する。
+  ## 中国語(簡体字)の必殺技名をランダムに生成する。
   ## 関数内では乱数初期化をしないので、呼び出し側で制御すること。
   runnableExamples:
     import random
