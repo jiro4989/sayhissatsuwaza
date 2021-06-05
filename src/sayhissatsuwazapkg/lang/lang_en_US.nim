@@ -1,4 +1,4 @@
-import sequtils, random
+import strutils, sequtils, random
 
 import ../types2
 import ../utils2
@@ -48,7 +48,9 @@ proc generate*(): string =
     randomize()
     echo generate()
 
+  var ret: seq[string]
   let pattern = patterns.sample
   for i, cond in pattern:
     let word = words.search(cond).sample
-    result.add word.text
+    ret.add word.text
+  result = ret.join(" ")
