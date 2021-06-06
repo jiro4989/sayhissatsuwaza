@@ -1,6 +1,6 @@
 # Package
 
-version       = "0.7.0"
+version       = "0.8.0"
 author        = "jiro4989"
 description   = "Say hissatsuwaza (special attack) on your terminal."
 license       = "MIT"
