@@ -68,7 +68,7 @@ NTI33555111.base = NTI33555096;
 var NNI503316485 = {kind: 2, offset: 0, typ: null, name: null, len: 2, sons: {"0": {kind: 1, offset: 0, typ: NTI503316485, name: "verb", len: 0, sons: null}, 
 "1": {kind: 1, offset: 1, typ: NTI503316485, name: "noun", len: 0, sons: null}}};
 NTI503316485.node = NNI503316485;
-var NNI503316484 = {kind: 2, offset: 0, typ: null, name: null, len: 15, sons: {"0": {kind: 1, offset: 0, typ: NTI503316484, name: "kanji", len: 0, sons: null}, 
+var NNI503316484 = {kind: 2, offset: 0, typ: null, name: null, len: 19, sons: {"0": {kind: 1, offset: 0, typ: NTI503316484, name: "kanji", len: 0, sons: null}, 
 "1": {kind: 1, offset: 1, typ: NTI503316484, name: "katakana", len: 0, sons: null}, 
 "2": {kind: 1, offset: 2, typ: NTI503316484, name: "element", len: 0, sons: null}, 
 "3": {kind: 1, offset: 3, typ: NTI503316484, name: "non", len: 0, sons: null}, 
@@ -82,7 +82,11 @@ var NNI503316484 = {kind: 2, offset: 0, typ: null, name: null, len: 15, sons: {"
 "11": {kind: 1, offset: 11, typ: NTI503316484, name: "slash", len: 0, sons: null}, 
 "12": {kind: 1, offset: 12, typ: NTI503316484, name: "blow", len: 0, sons: null}, 
 "13": {kind: 1, offset: 13, typ: NTI503316484, name: "thrust", len: 0, sons: null}, 
-"14": {kind: 1, offset: 14, typ: NTI503316484, name: "assist", len: 0, sons: null}}};
+"14": {kind: 1, offset: 14, typ: NTI503316484, name: "assist", len: 0, sons: null}, 
+"15": {kind: 1, offset: 15, typ: NTI503316484, name: "attrObject", len: 0, sons: null}, 
+"16": {kind: 1, offset: 16, typ: NTI503316484, name: "technique", len: 0, sons: null}, 
+"17": {kind: 1, offset: 17, typ: NTI503316484, name: "shape", len: 0, sons: null}, 
+"18": {kind: 1, offset: 18, typ: NTI503316484, name: "count", len: 0, sons: null}}};
 NTI503316484.node = NNI503316484;
 NTI503316492.base = NTI503316484;
 var NNI503316487 = {kind: 2, len: 2, offset: 0, typ: null, name: null, sons: [{kind: 1, offset: "partOfSpeech", len: 0, typ: NTI503316485, name: "partOfSpeech", sons: null}, 
@@ -422,8 +426,8 @@ function mnewString(len_33556890) {
 
   
 }
-    var patterns_922747011 = [[{partOfSpeech: 1, attrs: [2]}, {partOfSpeech: 1, attrs: [10]}], [{partOfSpeech: 1, attrs: [14]}, {partOfSpeech: 1, attrs: [10]}], [{partOfSpeech: 1, attrs: [5]}, {partOfSpeech: 1, attrs: [6]}]];
-            var words_922746970 = [{partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\x81\xAB\xE7\x84\xB0")}, {partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\xBA\xA2\xE8\x8E\xB2")}, {partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\x88\x86\xE7\x82\xB8")}, {partOfSpeech: 1, attrs: [5, 2], text: makeNimstrLit("\xE5\x86\xB7\xE5\x86\xBB")}, {partOfSpeech: 1, attrs: [6, 2], text: makeNimstrLit("\xE6\x97\x8B\xE9\xA3\x8E")}, {partOfSpeech: 1, attrs: [7, 2], text: makeNimstrLit("\xE9\x9B\xB7\xE7\xA5\x9E")}, {partOfSpeech: 1, attrs: [8, 2], text: makeNimstrLit("\xE5\x85\x89")}, {partOfSpeech: 1, attrs: [9, 2], text: makeNimstrLit("\xE9\xBB\x91\xE6\x9A\x97")}, {partOfSpeech: 1, attrs: [11, 10], text: makeNimstrLit("\xE5\x89\x91")}, {partOfSpeech: 1, attrs: [11, 10], text: makeNimstrLit("\xE5\x88\x80")}, {partOfSpeech: 1, attrs: [12, 10], text: makeNimstrLit("\xE6\x89\x93")}, {partOfSpeech: 1, attrs: [13, 10], text: makeNimstrLit("\xE5\x89\x91")}, {partOfSpeech: 1, attrs: [14], text: makeNimstrLit("\xE5\xBC\xBA")}];
+    var patterns_922747095 = [[{partOfSpeech: 1, attrs: [2]}, {partOfSpeech: 1, attrs: [10]}], [{partOfSpeech: 1, attrs: [2]}, {partOfSpeech: 1, attrs: [16]}], [{partOfSpeech: 0, attrs: []}, {partOfSpeech: 1, attrs: [15]}, {partOfSpeech: 1, attrs: [16]}], [{partOfSpeech: 0, attrs: []}, {partOfSpeech: 1, attrs: [15]}, {partOfSpeech: 1, attrs: [17]}, {partOfSpeech: 1, attrs: [11]}], [{partOfSpeech: 0, attrs: []}, {partOfSpeech: 1, attrs: [15]}, {partOfSpeech: 1, attrs: [18]}, {partOfSpeech: 1, attrs: [11]}]];
+            var words_922747010 = [{partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\x81\xAB\xE7\x84\xB0")}, {partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\xBA\xA2\xE8\x8E\xB2")}, {partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\x88\x86\xE7\x82\xB8")}, {partOfSpeech: 1, attrs: [5, 2], text: makeNimstrLit("\xE5\x86\xB7\xE5\x86\xBB")}, {partOfSpeech: 1, attrs: [6, 2], text: makeNimstrLit("\xE6\x97\x8B\xE9\xA3\x8E")}, {partOfSpeech: 1, attrs: [7, 2], text: makeNimstrLit("\xE9\x9B\xB7\xE7\xA5\x9E")}, {partOfSpeech: 1, attrs: [8, 2], text: makeNimstrLit("\xE5\x85\x89")}, {partOfSpeech: 1, attrs: [9, 2], text: makeNimstrLit("\xE9\xBB\x91\xE6\x9A\x97")}, {partOfSpeech: 1, attrs: [11, 10], text: makeNimstrLit("\xE5\x89\x91")}, {partOfSpeech: 1, attrs: [11, 10], text: makeNimstrLit("\xE5\x88\x80")}, {partOfSpeech: 1, attrs: [12, 10], text: makeNimstrLit("\xE6\x89\x93")}, {partOfSpeech: 1, attrs: [13, 10], text: makeNimstrLit("\xE5\x89\x91")}, {partOfSpeech: 1, attrs: [14], text: makeNimstrLit("\xE5\xBC\xBA")}, {partOfSpeech: 0, attrs: [], text: makeNimstrLit("\xE5\xA4\xBA")}, {partOfSpeech: 0, attrs: [], text: makeNimstrLit("\xE8\xBE\x9F")}, {partOfSpeech: 1, attrs: [15], text: makeNimstrLit("\xE5\x91\xBD")}, {partOfSpeech: 1, attrs: [15], text: makeNimstrLit("\xE9\xAD\x82")}, {partOfSpeech: 1, attrs: [15], text: makeNimstrLit("\xE9\xAD\x94")}, {partOfSpeech: 1, attrs: [16], text: makeNimstrLit("\xE5\x89\x91\xE6\xB3\x95")}, {partOfSpeech: 1, attrs: [16], text: makeNimstrLit("\xE5\x88\x80\xE6\xB3\x95")}, {partOfSpeech: 1, attrs: [17], text: makeNimstrLit("\xE5\x8D\x81\xE5\xAD\x97")}, {partOfSpeech: 1, attrs: [18], text: makeNimstrLit("\xE5\x8D\x81")}, {partOfSpeech: 1, attrs: [18], text: makeNimstrLit("\xE5\x8D\x81\xE4\xBA\x94")}, {partOfSpeech: 1, attrs: [18], text: makeNimstrLit("\xE7\x99\xBE")}, {partOfSpeech: 1, attrs: [18], text: makeNimstrLit("\xE5\x8D\x83")}];
     var patterns_939524227 = [[{partOfSpeech: 1, attrs: [2]}, {partOfSpeech: 1, attrs: [10]}], [{partOfSpeech: 1, attrs: [14]}, {partOfSpeech: 1, attrs: [10]}], [{partOfSpeech: 1, attrs: [5]}, {partOfSpeech: 1, attrs: [6]}]];
             var words_939524186 = [{partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\x81\xAB\xE7\x84\xB0")}, {partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\xB4\x85\xE8\x93\xAE")}, {partOfSpeech: 1, attrs: [4, 2], text: makeNimstrLit("\xE7\x88\x86\xE7\x82\xB8")}, {partOfSpeech: 1, attrs: [5, 2], text: makeNimstrLit("\xE5\x87\x8D\xE7\xB5\x90")}, {partOfSpeech: 1, attrs: [5, 2], text: makeNimstrLit("\xE5\x86\xB0")}, {partOfSpeech: 1, attrs: [6, 2], text: makeNimstrLit("\xE6\x97\x8B\xE9\xA2\xA8")}, {partOfSpeech: 1, attrs: [7, 2], text: makeNimstrLit("\xE9\x9B\xB7\xE7\xA5\x9E")}, {partOfSpeech: 1, attrs: [8, 2], text: makeNimstrLit("\xE5\x85\x89")}, {partOfSpeech: 1, attrs: [8, 2], text: makeNimstrLit("\xE8\x81\x96")}, {partOfSpeech: 1, attrs: [9, 2], text: makeNimstrLit("\xE9\xBB\x91\xE6\x9A\x97")}, {partOfSpeech: 1, attrs: [11, 10], text: makeNimstrLit("\xE6\xAE\xBA")}, {partOfSpeech: 1, attrs: [11, 10], text: makeNimstrLit("\xE5\x88\x80")}, {partOfSpeech: 1, attrs: [11, 10], text: makeNimstrLit("\xE5\x8A\x8D")}, {partOfSpeech: 1, attrs: [12, 10], text: makeNimstrLit("\xE6\x89\x93")}, {partOfSpeech: 1, attrs: [13, 10], text: makeNimstrLit("\xE5\x88\xBA")}, {partOfSpeech: 1, attrs: [14], text: makeNimstrLit("\xE5\xBC\xB7")}];
 if (!Math.trunc) {
@@ -576,6 +580,9 @@ var F = {procname: "module math", prev: framePtr, filename: "/home/runner/.choos
 framePtr = F;
 framePtr = F.prev;
 var F = {procname: "module bitops", prev: framePtr, filename: "/home/runner/.choosenim/toolchains/nim-#devel/lib/pure/bitops.nim", line: 0};
+framePtr = F;
+framePtr = F.prev;
+var F = {procname: "module macros", prev: framePtr, filename: "/home/runner/.choosenim/toolchains/nim-#devel/lib/core/macros.nim", line: 0};
 framePtr = F;
 framePtr = F.prev;
 var F = {procname: "module macros", prev: framePtr, filename: "/home/runner/.choosenim/toolchains/nim-#devel/lib/core/macros.nim", line: 0};
@@ -4004,16 +4011,16 @@ function rand_520094049(x_520094051) {
 
 }
 
-function HEX2EHEX2E_620758456(a_620758459, b_620758460) {
-  var result_620758461 = ({a: 0, b: 0});
+function HEX2EHEX2E_620758486(a_620758489, b_620758490) {
+  var result_620758491 = ({a: 0, b: 0});
 
   var F = {procname: ".....", prev: framePtr, filename: "/home/runner/.choosenim/toolchains/nim-#devel/lib/system.nim", line: 0};
   framePtr = F;
     F.line = 507;
-    result_620758461 = nimCopy(result_620758461, {a: a_620758459, b: b_620758460}, NTI570425845);
+    result_620758491 = nimCopy(result_620758491, {a: a_620758489, b: b_620758490}, NTI570425845);
   framePtr = F.prev;
 
-  return result_620758461;
+  return result_620758491;
 
 }
 
@@ -4038,7 +4045,7 @@ function sample_520094030(a_520094032) {
   var F = {procname: "sample.sample", prev: framePtr, filename: "/home/runner/.choosenim/toolchains/nim-#devel/lib/pure/random.nim", line: 0};
   framePtr = F;
     F.line = 431;
-    result_520094033 = nimCopy(null, a_520094032[chckIndx(rand_520094049(HEX2EHEX2E_620758456(0, (a_520094032).length - 1)), 0, (a_520094032).length - 1)], NTI520094139);
+    result_520094033 = nimCopy(null, a_520094032[chckIndx(rand_520094049(HEX2EHEX2E_620758486(0, (a_520094032).length - 1)), 0, (a_520094032).length - 1)], NTI520094139);
   framePtr = F.prev;
 
   return result_520094033;
@@ -4051,7 +4058,7 @@ function sample_520094103(a_520094105) {
   var F = {procname: "sample.sample", prev: framePtr, filename: "/home/runner/.choosenim/toolchains/nim-#devel/lib/pure/random.nim", line: 0};
   framePtr = F;
     F.line = 431;
-    result_520094106 = nimCopy(result_520094106, a_520094105[chckIndx(rand_520094049(HEX2EHEX2E_620758456(0, (a_520094105).length - 1)), 0, (a_520094105).length - 1)], NTI503316486);
+    result_520094106 = nimCopy(result_520094106, a_520094105[chckIndx(rand_520094049(HEX2EHEX2E_620758486(0, (a_520094105).length - 1)), 0, (a_520094105).length - 1)], NTI503316486);
   framePtr = F.prev;
 
   return result_520094106;
@@ -4655,37 +4662,37 @@ function generate_905969808() {
 
 }
 
-function generate_922747012() {
-  var result_922747013 = [];
+function generate_922747096() {
+  var result_922747097 = [];
 
   var F = {procname: "lang_zh_CN.generate", prev: framePtr, filename: "/home/runner/work/sayhissatsuwaza/sayhissatsuwaza/src/sayhissatsuwazapkg/lang/lang_zh_CN.nim", line: 0};
   framePtr = F;
-    F.line = 47;
-    var pattern_922747017 = sample_520094030(patterns_922747011);
+    F.line = 65;
+    var pattern_922747101 = sample_520094030(patterns_922747095);
     Label1: do {
-      F.line = 48;
-      var i_922747023 = 0;
-      F.line = 48;
-      var cond_922747024 = ({partOfSpeech: 0, attrs: []});
+      F.line = 66;
+      var i_922747107 = 0;
+      F.line = 66;
+      var cond_922747108 = ({partOfSpeech: 0, attrs: []});
       F.line = 168;
       var i_385876059 = 0;
       F.line = 169;
-      var L_385876060 = (pattern_922747017).length;
+      var L_385876060 = (pattern_922747101).length;
       Label2: do {
         F.line = 170;
           Label3: while (true) {
           if (!(i_385876059 < L_385876060)) break Label3;
-            F.line = 48;
-            i_922747023 = i_385876059;
+            F.line = 66;
+            i_922747107 = i_385876059;
             F.line = 171;
-            cond_922747024 = nimCopy(cond_922747024, pattern_922747017[chckIndx(i_385876059, 0, (pattern_922747017).length - 1)], NTI503316487);
-            F.line = 49;
-            var word_922747028 = sample_520094103(search_889192568(words_922746970, cond_922747024));
-            F.line = 50;
-            result_922747013.push.apply(result_922747013, word_922747028.text);;
+            cond_922747108 = nimCopy(cond_922747108, pattern_922747101[chckIndx(i_385876059, 0, (pattern_922747101).length - 1)], NTI503316487);
+            F.line = 67;
+            var word_922747112 = sample_520094103(search_889192568(words_922747010, cond_922747108));
+            F.line = 68;
+            result_922747097.push.apply(result_922747097, word_922747112.text);;
             F.line = 172;
             i_385876059 = addInt(i_385876059, 1);
-            if (!(((pattern_922747017).length == L_385876060))) {
+            if (!(((pattern_922747101).length == L_385876060))) {
             F.line = 173;
             failedAssertImpl_218103865(makeNimstrLit("/home/runner/.choosenim/toolchains/nim-#devel/lib/system/iterators.nim(173, 11) `len(a) == L` the length of the seq changed while iterating over it"));
             }
@@ -4695,7 +4702,7 @@ function generate_922747012() {
     } while (false);
   framePtr = F.prev;
 
-  return result_922747013;
+  return result_922747097;
 
 }
 
@@ -4760,7 +4767,7 @@ function generate_385875969(lang_385875970) {
       Temporary1 = generate_905969808();
       break;
     case 2:
-      Temporary1 = generate_922747012();
+      Temporary1 = generate_922747096();
       break;
     case 3:
       Temporary1 = generate_939524228();
