@@ -9,7 +9,7 @@ type
     kanji, katakana,
     element, non, fire, ice, wind, thunder, holy, darkness,
     attack, slash, blow, thrust,
-    assist
+    assist, attrObject, technique, shape, count
 
   PartOfSpeech* {.pure.} = enum
     ## 品詞。
