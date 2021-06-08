@@ -12,7 +12,7 @@
             display:flex;
             flex-direction:row;
            }
-          
+
            #result li span{
             width:20px;
             height:20px;
@@ -23,12 +23,54 @@
             width:100%;
             height:100%;
           }
+
+          #generateCountInput {
+            width: 60px;
+          }
+
+          .fade-in {
+            opacity: 1;
+            animation-name: upToDown;
+            animation-duration: 500ms;
+            animation-fill-mode: forwards;
+          }
+          @keyframes upToDown {
+            0% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            100% {
+                opacity:1;
+                transform: translateY(0px);
+            }
+          }
     </style>
     <script>
         function generate() {
             const lang = getCheckedLanguage()
+
+            const count = document.getElementById("generateCountInput").value
+            if (count < 1) {
+                return
+            }
+
+            let counter = 0
+            const timeoutMilliSec = 50
+            let timerId = setTimeout(function doFunc() {
+                appendGeneratedWord(lang)
+                counter++
+                if (count <= counter) {
+                    clearTimeout(timerId)
+                    return
+                }
+                timerId = setTimeout(doFunc, timeoutMilliSec)
+            }, timeoutMilliSec)
+        }
+
+        function appendGeneratedWord(lang) {
             const hissatsuwaza = cGenerate(lang)
             const resultElement = document.createElement("li")
+            resultElement.className = "fade-in"
             const textElement = document.createElement("input")
             textElement.className = "text"
             textElement.type = "text"
@@ -128,8 +170,8 @@
         <div class="input-div">
             <section>
                 <h2>入力</h2>
-                <hr>
-                <input class="button" type="button" value="必殺技を生成する" onclick="generate();">
+                <input class="button" type="button" value="必殺技を生成する" onclick="generate();" />
+                <label>生成個数: <input id="generateCountInput" type="number" value="1" /></label>
                 <label><input type="radio" name="lang" value="ja_JP" checked />日本語 (ja_JP)</label>
                 <label><input type="radio" name="lang" value="en_US"         />英語 (en_US)</label>
                 <label><input type="radio" name="lang" value="zh_CN"         />中国語(簡体字) (zh_CN)</label>
@@ -137,7 +179,6 @@
             </section>
             <section>
                 <h2>出力</h2>
-                <hr>
                 <ul id="result"></ul>
             </section>
         </div>
